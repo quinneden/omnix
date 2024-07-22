@@ -49,9 +49,9 @@ in {
   };
 
   programs.zsh.enable = true;
-  # environment.systemPackages = with pkgs; [curl file git rsync vim zsh];
+  environment.systemPackages = mkIf isLinux (with pkgs; [curl file git rsync vim zsh]);
 
   time.timeZone = "America/Los_Angeles";
 
-  # security.sudo.wheelNeedsPassword = false;
+  security.sudo.wheelNeedsPassword = mkIf isLinux false;
 }

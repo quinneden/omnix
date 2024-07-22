@@ -93,7 +93,10 @@ in {
       userEmail = "quinnyxboy@gmail.com";
       # signing.key = "";
       # signing.signByDefault = true;
-      extraConfig.github.user = "quinneden";
+      extraConfig = {
+        github.user = "quinneden";
+        init.defaultBranch = "main";
+      };
     };
 
     # programs.gpg = {

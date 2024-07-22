@@ -68,7 +68,7 @@
     # (final: prev: { mesa = final.mesa-asahi-edge; })
   ];
 
-  networking.hostName = "nixos-macmini";
+  networking.hostName = "chimera";
   networking.wireless.iwd = {
     enable = true;
     settings.General.EnableNetworkConfiguration = true;

@@ -9,7 +9,6 @@
   ];
 
   # Audio
-  sound.enable = true;
   security.rtkit.enable = true;
   services.pipewire = {
     enable = true;
@@ -29,11 +28,11 @@
   hardware.bluetooth.enable = true;
 
   # Screen
-  hardware.brillo.enable = true;
+  # hardware.brillo.enable = true;
 
   # Yubikey
-  services.pcscd.enable = true;
-  services.udev.packages = [pkgs.yubikey-personalization];
+  # services.pcscd.enable = true;
+  # services.udev.packages = [pkgs.yubikey-personalization];
 
   # Compositor
   programs.hyprland.enable = true;
@@ -131,26 +130,19 @@
 
     home.packages = with pkgs; [
       chatterino2
-      # discord TODO: no pkg for aarch64?
       gnome.gnome-disk-utility
       libnotify
       pantheon.elementary-calculator
       pinentry
       playerctl
       qpwgraph
-      # spotify TODO: no pkg for aarch64?
-      # streamlink TODO: no pkg for aarch64?
-      # streamlink-twitch-gui-bin TODO: no pkg for aarch64?
       wayland-utils
       wev
-      # wineWowPackages.waylandFull
-      # wineasio TODO: no pkg for aarch64?
-      # winetricks TODO: no pkg for aarch64?
       wireplumber
       wl-clipboard
       xdg-utils
       xfce.thunar
-      yubioath-flutter
+      # yubioath-flutter
     ];
 
     gtk = {
@@ -170,7 +162,7 @@
       enable = true;
       systemd.enable = true;
       settings = {
-        monitor = "eDP-1,highres,auto,1.600000";
+        monitor = "HDMI-A-1,2560x1440@144,0x0,1";
 
         input = {
           follow_mouse = 1;
@@ -253,8 +245,8 @@
           ", XF86AudioPrev, exec, playerctl previous"
           ", XF86AudioNext, exec, playerctl next"
           ", XF86Sleep, exec, swaync-client --toggle-dnd"
-          "$mainMod, XF86MonBrightnessUp, exec, brillo -k -A 5"
-          "$mainMod, XF86MonBrightnessDown, exec, brillo -k -U 5"
+          # "$mainMod, XF86MonBrightnessUp, exec, brillo -k -A 5"
+          # "$mainMod, XF86MonBrightnessDown, exec, brillo -k -U 5"
         ];
 
         bindr = [
@@ -266,9 +258,9 @@
             "$mainMod,RETURN,exec,foot"
             "$mainMod,Q,killactive,"
             # "$mainMod,M,exit,"
-            "$mainMod,S,togglefloating,"
+            "$mainMod,SPACE,togglefloating,"
             "$mainMod,P,pseudo,"
-            "$mainMod,B,togglesplit,"
+            "$mainMod SHIFT,B,togglesplit,"
             "$mainMod,TAB,focuscurrentorlast,"
 
             # NOTE: colemak
@@ -361,12 +353,12 @@
       id = 0;
       userChrome = builtins.readFile ../../conf.d/userChrome.css;
       extensions = with pkgs.nur.repos.rycee.firefox-addons; [
-        browserpass
-        betterttv
-        metamask
-        reddit-enhancement-suite
+        # browserpass
+        # betterttv
+        # metamask
+        # reddit-enhancement-suite
         ublock-origin
-        vimium
+        # vimium
       ];
 
       search.default = "DuckDuckGo";
@@ -377,8 +369,8 @@
         "app.normandy.enabled" = false;
         "beacon.enabled" = false;
         "browser.startup.homepage" = "https://lobste.rs";
-        "browser.search.region" = "GB";
-        "browser.search.countryCode" = "GB";
+        "browser.search.region" = "US";
+        "browser.search.countryCode" = "US";
         "browser.search.hiddenOneOffs" = "Google,Amazon.com,Bing";
         "browser.search.isUS" = false;
         "browser.ctrlTab.recentlyUsedOrder" = false;
@@ -397,7 +389,7 @@
         "general.useragent.locale" = "en-US";
         "identity.fxaccounts.account.device.name" = config.networking.hostName;
         "intl.accept_languages" = "en-US, en";
-        "intl.locale.requested" = "en-US,en-US";
+        "intl.locale.requested" = "en-US";
         "privacy.donottrackheader.enabled" = true;
         "privacy.donottrackheader.value" = 1;
         "privacy.trackingprotection.enabled" = true;
@@ -666,7 +658,7 @@
     xdg.userDirs.enable = true;
     xdg.userDirs.createDirectories = true;
 
-    programs.obs-studio.enable = true;
+    # programs.obs-studio.enable = true;
 
     # Storage Management
     services.udiskie.enable = true;
