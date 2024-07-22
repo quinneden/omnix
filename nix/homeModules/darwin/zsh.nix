@@ -1,5 +1,4 @@
 {
-  hostname,
   inputs,
   lib,
   pkgs,
@@ -7,6 +6,7 @@
 }: let
   inherit (lib) mkIf mkMerge optional;
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
+  hostname = "macmini";
 in {
   programs.zsh = {
     enable = true;
@@ -15,12 +15,12 @@ in {
     syntaxHighlighting.enable = true;
     oh-my-zsh = {
       enable = true;
-      custom = optional isDarwin "/Users/quinn/.scripts/zsh";
+      custom = mkIf isDarwin "/Users/quinn/.scripts/zsh";
       plugins = mkMerge [
         (mkIf isDarwin ["zsh-navigation-tools" "nix-zsh-completions" "iterm2" "direnv"])
         (mkIf isLinux ["zsh-navigation-tools" "direnv" "eza"])
       ];
-      extraConfig = optional isDarwin ''
+      extraConfig = mkIf isDarwin ''
         zstyle ':omz:update' mode auto
         zstyle ':omz:update' frequency 13
       '';
@@ -73,7 +73,7 @@ in {
         tree = "eza -aT -I '.git*'";
       })
     ];
-    sessionVariables = optional isDarwin {
+    sessionVariables = mkIf isDarwin {
       BAT_THEME = "Dracula";
       DARWIN = "/Users/quinn/Darwin";
       EDITOR = "micro";
@@ -91,7 +91,7 @@ in {
       workdir = "$HOME/workdir";
       compdir = "$HOME/.scripts/zsh-custom/completions";
     };
-    initExtra = optional isDarwin ''
+    initExtra = mkIf isDarwin ''
       for f (~/.scripts/zsh/[^plugins]**/*(.)); do source $f; done
 
       test -e /Users/quinn/.iterm2_shell_integration.zsh && source /Users/quinn/.iterm2_shell_integration.zsh || true

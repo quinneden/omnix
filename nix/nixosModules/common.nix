@@ -53,5 +53,5 @@ in {
 
   time.timeZone = "America/Los_Angeles";
 
-  security.sudo.wheelNeedsPassword = false;
+  # security.sudo.wheelNeedsPassword = false;
 }

@@ -13,6 +13,9 @@
     inputs.stylix.darwinModules.stylix
   ];
 
+  nix.configureBuildUsers = true;
+  ids.uids.nixbld = lib.mkForce 40000; # or some other uid
+
   networking.hostName = "macmini";
 
   # nix.distributedBuilds = true;
@@ -27,23 +30,23 @@
   #   }
   # ];
 
-  nix.linux-builder = {
-    enable = true;
-    ephemeral = true;
-    maxJobs = 6;
-    config = {pkgs, ...}: {
-      virtualisation = {
-        cores = 6;
-        darwin-builder = {
-          diskSize = 100 * 1024;
-          memorySize = 6 * 1024;
-        };
-      };
-      environment.systemPackages = with pkgs; [
-        btrfs-progs
-      ];
-    };
-  };
+  # nix.linux-builder = {
+  #   enable = true;
+  #   ephemeral = true;
+  #   maxJobs = 6;
+  #   config = {pkgs, ...}: {
+  #     virtualisation = {
+  #       cores = 6;
+  #       darwin-builder = {
+  #         diskSize = 100 * 1024;
+  #         memorySize = 6 * 1024;
+  #       };
+  #     };
+  #     environment.systemPackages = with pkgs; [
+  #       btrfs-progs
+  #     ];
+  #   };
+  # };
 
   # NOTE: not sure why stylix insists on having an image...
   stylix.image = pkgs.runCommand "stylix-image" {} "mkdir $out";
