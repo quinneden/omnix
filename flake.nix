@@ -1,5 +1,5 @@
 {
-  description = "cmacrae's systems configuration";
+  description = "quinneden's systems configuration";
 
   inputs = {
     nixpkgs.url = "nixpkgs/nixos-unstable";
@@ -10,7 +10,7 @@
 
     # TODO: move to nixpkgs provided kernel once vendor patches
     #       are available upstream
-    nix-rpi5.url = "gitlab:vriska/nix-rpi5";
+    # nix-rpi5.url = "gitlab:vriska/nix-rpi5";
 
     flakelight = {
       url = "github:nix-community/flakelight";
@@ -24,25 +24,22 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
 
-    emacs-overlay = {
-      url = "github:nix-community/emacs-overlay";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
+    # emacs-overlay = {
+    #   url = "github:nix-community/emacs-overlay";
+    #   inputs.nixpkgs.follows = "nixpkgs";
+    # };
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    limani = {
-      # url = "path:/Users/cmacrae/src/github.com/cmacrae/limani";
-      url = "/Users/cmacrae/src/github.com/cmacrae/limani";
-      # url = "github:cmacrae/limani";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
   };
 
-  outputs = { flakelight, flakelight-darwin, ... }@inputs:
+  outputs = {
+    flakelight,
+    flakelight-darwin,
+    ...
+  } @ inputs:
     flakelight ./. {
       inherit inputs;
       imports = [
@@ -51,26 +48,24 @@
 
       withOverlays = with inputs; [
         nur.overlay
-        emacs-overlay.overlays.emacs
-        emacs-overlay.overlays.package
+        # emacs-overlay.overlays.emacs
+        # emacs-overlay.overlays.package
         nixos-apple-silicon.overlays.apple-silicon-overlay
       ];
 
-      apps.default = { system, ... }:
+      apps.default = {system, ...}:
         inputs.lollypops.apps.${system}.default {
           configFlake = inputs.self;
         };
 
-      formatter = pkgs: pkgs.nixpkgs-fmt;
+      formatter = pkgs: pkgs.alejandra;
 
-      checks.statix = pkgs:
-        let
-          conf = pkgs.writers.writeTOML "statix.toml" {
-            disabled = [ "empty_pattern" "repeated_keys" ];
-            ignore = [ "result" ".direnv" ];
-          };
-        in
-        "${pkgs.statix}/bin/statix check --config ${conf}";
+      checks.statix = pkgs: let
+        conf = pkgs.writers.writeTOML "statix.toml" {
+          disabled = ["empty_pattern" "repeated_keys"];
+          ignore = ["result" ".direnv"];
+        };
+      in "${pkgs.statix}/bin/statix check --config ${conf}";
       checks.deadnix = pkgs: "${pkgs.deadnix}/bin/deadnix -f -_ -l --exclude result .direnv";
     };
-} 
+}

@@ -16,89 +16,47 @@
   border: 2px solid @muted;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .notification {
+.floating-notifications.background .notification-row .notification-background .notification {
   padding: 0.5rem;
   /* border-radius: 0.5rem; */
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .notification.critical {
+.floating-notifications.background .notification-row .notification-background .notification.critical {
   border: 2px solid @love;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .notification
-  .notification-content
-  .summary {
+.floating-notifications.background .notification-row .notification-background .notification .notification-content .summary {
   margin: 0.5rem;
   color: @iris;
   font-weight: bold;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .notification
-  .notification-content
-  .body {
+.floating-notifications.background .notification-row .notification-background .notification .notification-content .body {
   margin: 0.5rem;
   color: @text;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .notification
-  > *:last-child
-  > * {
+.floating-notifications.background .notification-row .notification-background .notification>*:last-child>* {
   color: @muted;
   min-height: 3rem;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .notification
-  > *:last-child
-  > *
-  .notification-action {
+.floating-notifications.background .notification-row .notification-background .notification>*:last-child>* .notification-action {
   /* border-radius: 0.5rem; */
   color: @text;
   background-color: @base;
   border: 2px solid @muted;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .notification
-  > *:last-child
-  > *
-  .notification-action:hover {
+.floating-notifications.background .notification-row .notification-background .notification>*:last-child>* .notification-action:hover {
   background-color: @base;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .notification
-  > *:last-child
-  > *
-  .notification-action:active {
+.floating-notifications.background .notification-row .notification-background .notification>*:last-child>* .notification-action:active {
   background-color: @muted;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .close-button {
+.floating-notifications.background .notification-row .notification-background .close-button {
   margin: 0.5rem;
   padding: 0.25rem;
   /* border-radius: 0.5rem; */
@@ -106,17 +64,11 @@
   background-color: @love;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .close-button:hover {
+.floating-notifications.background .notification-row .notification-background .close-button:hover {
   color: @base;
 }
 
-.floating-notifications.background
-  .notification-row
-  .notification-background
-  .close-button:active {
+.floating-notifications.background .notification-row .notification-background .close-button:active {
   background-color: @rose;
 }
 
@@ -163,83 +115,43 @@
   /* border-radius: 0.5rem; */
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification.critical {
+.control-center .notification-row .notification-background .notification.critical {
   border: 2px solid @love;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification
-  .notification-content {
+.control-center .notification-row .notification-background .notification .notification-content {
   color: @text;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification
-  .notification-content
-  .summary {
+.control-center .notification-row .notification-background .notification .notification-content .summary {
   margin: 0.5rem;
   color: @iris;
   font-weight: bold;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification
-  .notification-content
-  .body {
+.control-center .notification-row .notification-background .notification .notification-content .body {
   margin: 0.5rem;
   color: @text;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification
-  > *:last-child
-  > * {
+.control-center .notification-row .notification-background .notification>*:last-child>* {
   min-height: 3rem;
   color: @subtle;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification
-  > *:last-child
-  > *
-  .notification-action {
+.control-center .notification-row .notification-background .notification>*:last-child>* .notification-action {
   /* border-radius: 0.5rem; */
   color: @muted;
   background-color: @surface;
   border: 2px solid @muted;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification
-  > *:last-child
-  > *
-  .notification-action:hover {
+.control-center .notification-row .notification-background .notification>*:last-child>* .notification-action:hover {
   color: @muted;
   background-color: @base;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .notification
-  > *:last-child
-  > *
-  .notification-action:active {
+.control-center .notification-row .notification-background .notification>*:last-child>* .notification-action:active {
   background-color: @muted;
 }
 
@@ -255,10 +167,7 @@
   color: @base;
 }
 
-.control-center
-  .notification-row
-  .notification-background
-  .close-button:active {
+.control-center .notification-row .notification-background .close-button:active {
   background-color: @rose;
 }
 
@@ -299,17 +208,17 @@ trough {
   color: @subtle;
 }
 
-.widget-dnd > switch {
+.widget-dnd>switch {
   /* border-radius: 0.5rem; */
   background: @base;
   border: 2px solid @muted;
 }
 
-.widget-dnd > switch:checked slider {
+.widget-dnd>switch:checked slider {
   background: @pine;
 }
 
-.widget-dnd > switch slider {
+.widget-dnd>switch slider {
   background: @muted;
   /* border-radius: 0.5rem; */
   margin: 0.25rem;

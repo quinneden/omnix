@@ -1,4 +1,9 @@
-{ config, pkgs, inputs, ... }: {
+{
+  config,
+  pkgs,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.self.nixosModules.common
     inputs.self.nixosModules.home
@@ -6,11 +11,11 @@
     inputs.home-manager.nixosModules.home-manager
   ];
 
-  boot.initrd.availableKernelModules = [ "nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod" ];
-  boot.initrd.kernelModules = [ ];
-  boot.kernelModules = [ "kvm-amd" ];
-  boot.extraModulePackages = [ ];
-  boot.supportedFilesystems = [ "zfs" ];
+  boot.initrd.availableKernelModules = ["nvme" "xhci_pci" "ahci" "usbhid" "usb_storage" "sd_mod"];
+  boot.initrd.kernelModules = [];
+  boot.kernelModules = ["kvm-amd"];
+  boot.extraModulePackages = [];
+  boot.supportedFilesystems = ["zfs"];
   boot.kernelPackages = config.boot.zfs.package.latestCompatibleLinuxPackages;
   boot.loader.efi.efiSysMountPoint = "/boot/efi";
   boot.loader.efi.canTouchEfiVariables = false;
@@ -45,31 +50,31 @@
     "/" = {
       device = "rpool/nixos/root";
       fsType = "zfs";
-      options = [ "zfsutil" "X-mount.mkdir" ];
+      options = ["zfsutil" "X-mount.mkdir"];
     };
 
     "/home" = {
       device = "rpool/nixos/home";
       fsType = "zfs";
-      options = [ "zfsutil" "X-mount.mkdir" ];
+      options = ["zfsutil" "X-mount.mkdir"];
     };
 
     "/var/lib" = {
       device = "rpool/nixos/var/lib";
       fsType = "zfs";
-      options = [ "zfsutil" "X-mount.mkdir" ];
+      options = ["zfsutil" "X-mount.mkdir"];
     };
 
     "/var/log" = {
       device = "rpool/nixos/var/log";
       fsType = "zfs";
-      options = [ "zfsutil" "X-mount.mkdir" ];
+      options = ["zfsutil" "X-mount.mkdir"];
     };
 
     "/boot" = {
       device = "bpool/nixos/root";
       fsType = "zfs";
-      options = [ "zfsutil" "X-mount.mkdir" ];
+      options = ["zfsutil" "X-mount.mkdir"];
     };
 
     "/boot/efis/nvme-WD_BLACK_SN770_2TB_225013801136-part1" = {
@@ -80,7 +85,7 @@
     "/boot/efi" = {
       device = "/boot/efis/nvme-WD_BLACK_SN770_2TB_225013801136-part1";
       fsType = "none";
-      options = [ "bind" ];
+      options = ["bind"];
     };
 
     # NFS Mounts
@@ -106,10 +111,9 @@
   };
 
   # System packages
-  environment.systemPackages = with pkgs; [ nfs-utils ];
+  environment.systemPackages = with pkgs; [nfs-utils];
 
-  users.users.cmacrae.openssh.authorizedKeys.keys = [ "ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDI0ynIFxGh/vtMnReWNA0m0JVQHuP72vi3+jOUDvWZMU+rDX7uljyw8wAsD5u4D5G5GlDp+A0kUo2ASk+NMvz55885woLix/q7P63meeOKOepteIzwdHP6ZYdEzjlLZSCinvf9bumMyiTzqvA/cEFgmUfCz3LEQ9qzoo4b9y/W7J84cUJBTascE3VU6pdG3AIl7wR5VnXu6USuEQl/XVAPUV9y5w+7lwIfBLDXp4DaHnsP7Xc8gTovb/CpsLk7pknd0hPaIFsqTAUmVnplDxjSo/3E+MeCFbzqqt42HBCVQj+CHgwhsqIawll4B1FwnULJAiWhqFAzG6emprEYqN3x" ];
-
+  users.users.quinn.openssh.authorizedKeys.keys = ["ssh-rsa AAAAB3NzaC1yc2EAAAADAQABAAABAQDI0ynIFxGh/vtMnReWNA0m0JVQHuP72vi3+jOUDvWZMU+rDX7uljyw8wAsD5u4D5G5GlDp+A0kUo2ASk+NMvz55885woLix/q7P63meeOKOepteIzwdHP6ZYdEzjlLZSCinvf9bumMyiTzqvA/cEFgmUfCz3LEQ9qzoo4b9y/W7J84cUJBTascE3VU6pdG3AIl7wR5VnXu6USuEQl/XVAPUV9y5w+7lwIfBLDXp4DaHnsP7Xc8gTovb/CpsLk7pknd0hPaIFsqTAUmVnplDxjSo/3E+MeCFbzqqt42HBCVQj+CHgwhsqIawll4B1FwnULJAiWhqFAzG6emprEYqN3x"];
 
   stylix.image = builtins.fetchurl {
     url = "https://w.wallhaven.cc/full/d6/wallhaven-d6mg33.png";

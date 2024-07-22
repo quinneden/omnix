@@ -1,5 +1,10 @@
-{ config, pkgs, modulesPath, inputs, ... }: {
-
+{
+  config,
+  pkgs,
+  modulesPath,
+  inputs,
+  ...
+}: {
   imports = [
     inputs.nixos-apple-silicon.nixosModules.apple-silicon-support
     inputs.home-manager.nixosModules.home-manager
@@ -24,7 +29,7 @@
     "dm-snapshot"
   ];
 
-  boot.kernelParams = [ "apple_dcp.show_notch=1" ];
+  boot.kernelParams = ["apple_dcp.show_notch=1"];
 
   zramSwap.enable = true;
 
@@ -47,17 +52,15 @@
     withRust = true;
   };
 
-  fileSystems."/" =
-    {
-      device = "/dev/disk/by-uuid/a636060b-b2e4-4bc4-841b-7531ace6a990";
-      fsType = "ext4";
-    };
+  fileSystems."/" = {
+    device = "/dev/disk/by-uuid/a636060b-b2e4-4bc4-841b-7531ace6a990";
+    fsType = "ext4";
+  };
 
-  fileSystems."/boot" =
-    {
-      device = "/dev/disk/by-uuid/80B9-1907";
-      fsType = "vfat";
-    };
+  fileSystems."/boot" = {
+    device = "/dev/disk/by-uuid/80B9-1907";
+    fsType = "vfat";
+  };
 
   nixpkgs.hostPlatform.system = "aarch64-linux";
   nixpkgs.overlays = [
@@ -74,11 +77,11 @@
   services.logind.powerKey = "ignore";
   services.logind.suspendKey = "ignore";
 
-  lollypops.tasks = [ "rebuild" ];
+  lollypops.tasks = ["rebuild"];
   lollypops.deployment.local-evaluation = true;
   lollypops.extraTasks.rebuild = {
     dir = ".";
-    deps = [ ];
+    deps = [];
     desc = "Local rebuild: ${config.networking.hostName}";
     cmds = [
       ''
@@ -94,5 +97,5 @@
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
 
-  system.stateVersion = "24.05";
+  system.stateVersion = "24.11";
 }
