@@ -36,7 +36,7 @@ in {
         cddl = "cd ~/Downloads";
         code = "codium";
         code-flake = "cd ~/Darwin && codium .";
-        darwin-switch = "darwin-rebuild switch --flake $DARWIN#${hostname}";
+        darwin-switch = "darwin-rebuild switch --flake $(readlink ~/Darwin)#macmini";
         df = "df -h";
         du = "du -h";
         flake-tree = "eza -aT ~/Darwin -I '.git*|.vscode*|*.DS_Store|Icon?'";
