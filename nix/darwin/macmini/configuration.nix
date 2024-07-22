@@ -221,7 +221,7 @@
       "rsync"
       "rtmpdump"
       "rust"
-      "rustup-init"
+      "rustup"
       "sevenzip"
       "shared-mime-info"
       "shellcheck"
