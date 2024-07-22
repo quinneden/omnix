@@ -8,10 +8,6 @@
     stylix.url = "github:danth/stylix";
     lollypops.url = "github:pinpox/lollypops";
 
-    # TODO: move to nixpkgs provided kernel once vendor patches
-    #       are available upstream
-    # nix-rpi5.url = "gitlab:vriska/nix-rpi5";
-
     flakelight = {
       url = "github:nix-community/flakelight";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -23,11 +19,6 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-
-    # emacs-overlay = {
-    #   url = "github:nix-community/emacs-overlay";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
 
     hyprland = {
       url = "github:hyprwm/Hyprland";
@@ -48,8 +39,6 @@
 
       withOverlays = with inputs; [
         nur.overlay
-        # emacs-overlay.overlays.emacs
-        # emacs-overlay.overlays.package
         nixos-apple-silicon.overlays.apple-silicon-overlay
       ];
 
