@@ -6,11 +6,11 @@
   ...
 }: {
   imports = [
-    inputs.nixos-apple-silicon.nixosModules.apple-silicon-support
     inputs.home-manager.nixosModules.home-manager
+    inputs.nixos-apple-silicon.nixosModules.apple-silicon-support
     inputs.self.nixosModules.common
-    inputs.self.nixosModules.home
     inputs.self.nixosModules.graphical
+    inputs.self.nixosModules.home
 
     (modulesPath + "/installer/scan/not-detected.nix")
   ];
@@ -29,11 +29,14 @@
     "dm-snapshot"
   ];
 
-  boot.kernelParams = ["apple_dcp.show_notch=1"];
+  boot.kernelParams = [];
 
-  zramSwap.enable = true;
+  zramSwap = {
+    enable = true;
+    memoryPercent = 100;
+  };
 
-  hardware.opengl.enable = true;
+  hardware.graphics.enable = true;
   hardware.asahi = {
     # TODO: awaiting upstream support for pure-eval solution.
     #       for now, grab it from a temporary webserver rather
@@ -44,21 +47,18 @@
       sha256 = "01swixbj1vyksm8h1m2ppnyxdfl9p7gqaxgagql29bysvngr8win";
     };
 
-    addEdgeKernelConfig = true;
     useExperimentalGPUDriver = true;
-    # TODO: how do we manage this purely?
-    # experimentalGPUInstallMode = "driver";
     experimentalGPUInstallMode = "replace";
     withRust = true;
   };
 
   fileSystems."/" = {
-    device = "/dev/disk/by-uuid/a636060b-b2e4-4bc4-841b-7531ace6a990";
+    device = "/dev/disk/by-label/nixos";
     fsType = "ext4";
   };
 
   fileSystems."/boot" = {
-    device = "/dev/disk/by-uuid/80B9-1907";
+    device = "/dev/disk/by-label/EFI - NIXOS";
     fsType = "vfat";
   };
 
@@ -68,7 +68,7 @@
     # (final: prev: { mesa = final.mesa-asahi-edge; })
   ];
 
-  networking.hostName = "midnight";
+  networking.hostName = "nixos-macmini";
   networking.wireless.iwd = {
     enable = true;
     settings.General.EnableNetworkConfiguration = true;
@@ -91,8 +91,8 @@
   };
 
   stylix.image = builtins.fetchurl {
-    url = "https://w.wallhaven.cc/full/d6/wallhaven-d6mg33.png";
-    sha256 = "01vhwfx2qsvxgcrhbyx5d0c6c0ahjp50qy147638m7zfinhk70vx";
+    url = "https://github.com/NixOS/nixos-artwork/blob/master/wallpapers/nix-wallpaper-binary-black.png";
+    sha256 = "3137b7f91abe132c599788385bf04ae150741387407cb4ab0cb974470a76a339";
   };
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";

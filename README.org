@@ -25,7 +25,7 @@ There are several machines defined in =nix/nixos=
 *** midnight
 My daily driver: an M2 MacBook Air (running NixOS, courtesy of the amazing [[https://asahilinux.org/][Asahi Project]] & [[https://github.com/tpwrules/nixos-apple-silicon][nixos-apple-silicon]]). A minimal macOS installation remains, but it's pretty much just an Ableton hypervisor
 
-*** macmini
+*** nilbook
 M3 MacBook Pro for work, macOS
 
 *** net1
