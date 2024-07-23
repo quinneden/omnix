@@ -12,7 +12,6 @@ in {
     {
       description = "Quinn Edenfield";
       shell = pkgs.zsh;
-      home = "/Users/quinn";
     }
     (mkIf isLinux {
       home = "/home/quinn";
@@ -134,28 +133,28 @@ in {
     #     throw-keyids = "";
     #   };
     # };
-
-    services = let
-      conf = {
-        enable = true;
-        enableZshIntegration = true;
-        enableSshSupport = true;
-        # sshKeys = [];
-        pinentryFlavor =
-          if isDarwin
-          then "mac"
-          else "qt";
-        extraConfig = ''
-          allow-emacs-pinentry
-          allow-loopback-pinentry
-        '';
-      };
-    in
-      # TODO: hack to get around waiting for home-manager#2964
-      mkMerge [
-        (mkIf isLinux {gpg-agent = conf;})
-        (mkIf isDarwin {darwin-gpg-agent = conf;})
-      ];
+#
+#     services = let
+#       conf = {
+#         enable = true;
+#         enableZshIntegration = true;
+#         enableSshSupport = true;
+#         # sshKeys = [];
+#         pinentryFlavor =
+#           if isDarwin
+#           then "mac"
+#           else "qt";
+#         extraConfig = ''
+#           allow-emacs-pinentry
+#           allow-loopback-pinentry
+#         '';
+#       };
+#     in
+#       # TODO: hack to get around waiting for home-manager#2964
+#       mkMerge [
+#         (mkIf isLinux {gpg-agent = conf;})
+#         (mkIf isDarwin {darwin-gpg-agent = conf;})
+#       ];
 
     programs.direnv = {
       enable = true;
