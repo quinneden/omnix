@@ -49,8 +49,8 @@ in {
     imports = optional isDarwin inputs.self.homeModules.darwin;
 
     home.stateVersion = "24.11";
-    home.packages = with pkgs;
-      [
+    home.packages = mkMerge [
+      (with pkgs; [
         # aspell
         # aspellDicts.en
         # aspellDicts.en-computers
@@ -74,16 +74,17 @@ in {
         rsync
         unzip
         wget
-      ]
-      ++
-      # NOTE: podman install on macOS is handled by homebrew
-      #       as it includes podman-remote
-      (lib.optionals isLinux podman);
+      ])
+      (mkIf isLinux [pkgs.podman])
+    ];
 
     home.sessionVariables = {
       PAGER = "less -R";
       EDITOR = "micro";
-      PATH = mkIf isDarwin "$PATH:/opt/homebrew/bin";
+      PATH =
+        if isDarwin
+        then "$PATH:/opt/homebrew/bin"
+        else "$PATH";
     };
 
     programs.git = {
@@ -133,28 +134,28 @@ in {
     #     throw-keyids = "";
     #   };
     # };
-#
-#     services = let
-#       conf = {
-#         enable = true;
-#         enableZshIntegration = true;
-#         enableSshSupport = true;
-#         # sshKeys = [];
-#         pinentryFlavor =
-#           if isDarwin
-#           then "mac"
-#           else "qt";
-#         extraConfig = ''
-#           allow-emacs-pinentry
-#           allow-loopback-pinentry
-#         '';
-#       };
-#     in
-#       # TODO: hack to get around waiting for home-manager#2964
-#       mkMerge [
-#         (mkIf isLinux {gpg-agent = conf;})
-#         (mkIf isDarwin {darwin-gpg-agent = conf;})
-#       ];
+    #
+    #     services = let
+    #       conf = {
+    #         enable = true;
+    #         enableZshIntegration = true;
+    #         enableSshSupport = true;
+    #         # sshKeys = [];
+    #         pinentryFlavor =
+    #           if isDarwin
+    #           then "mac"
+    #           else "qt";
+    #         extraConfig = ''
+    #           allow-emacs-pinentry
+    #           allow-loopback-pinentry
+    #         '';
+    #       };
+    #     in
+    #       # TODO: hack to get around waiting for home-manager#2964
+    #       mkMerge [
+    #         (mkIf isLinux {gpg-agent = conf;})
+    #         (mkIf isDarwin {darwin-gpg-agent = conf;})
+    #       ];
 
     programs.direnv = {
       enable = true;
