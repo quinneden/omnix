@@ -130,7 +130,7 @@
 
     home.packages = with pkgs; [
       chatterino2
-      gnome.gnome-disk-utility
+      gnome-disk-utility
       libnotify
       pantheon.elementary-calculator
       pinentry

@@ -91,8 +91,8 @@
   };
 
   stylix.image = builtins.fetchurl {
-    url = "https://github.com/NixOS/nixos-artwork/blob/master/wallpapers/nix-wallpaper-binary-black.png";
-    sha256 = "3137b7f91abe132c599788385bf04ae150741387407cb4ab0cb974470a76a339";
+    url = "https://github.com/NixOS/nixos-artwork/blob/master/wallpapers/nix-wallpaper-binary-black.png?raw=true";
+    sha256 = "9a14a1d30cf69ed1ff92b8b73c5e59ac5ca48e37502e19a52250c3185408616c";
   };
 
   stylix.base16Scheme = "${pkgs.base16-schemes}/share/themes/rose-pine.yaml";
