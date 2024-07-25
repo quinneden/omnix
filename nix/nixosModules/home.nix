@@ -9,10 +9,11 @@
   inherit (pkgs.stdenv.hostPlatform) isDarwin isLinux;
 in {
   users.users.quinn = mkMerge [
-    {
+    (mkIf isDarwin {
       description = "Quinn Edenfield";
       shell = pkgs.zsh;
-    }
+      home = "/Users/quinn";
+    })
     (mkIf isLinux {
       home = "/home/quinn";
       isNormalUser = true;
