@@ -7,46 +7,55 @@
 }: {
   imports = [
     inputs.home-manager.darwinModules.home-manager
+    # inputs.lix-module.nixosModules.default
     inputs.self.darwinModules.common
     inputs.self.nixosModules.common
     inputs.self.nixosModules.home
     inputs.stylix.darwinModules.stylix
   ];
 
-  nix.configureBuildUsers = true;
-  ids.uids.nixbld = lib.mkForce 40000; # or some other uid
+  ids.uids.nixbld = lib.mkForce 40000;
 
   networking.hostName = "macmini";
 
-  # nix.distributedBuilds = true;
-  # nix.buildMachines = [
-  #   {
-  #     hostName = "nix-builder";
-  #     system = "aarch64-linux";
-  #     maxJobs = 2;
-  #     sshUser = "quinn";
-  #     sshKey = "${config.users.users.quinn.home}/.lima/_config/user";
-  #     supportedFeatures = ["benchmark" "big-parallel" "nixos-test"];
-  #   }
-  # ];
-
-  # nix.linux-builder = {
-  #   enable = true;
-  #   ephemeral = true;
-  #   maxJobs = 6;
-  #   config = {pkgs, ...}: {
-  #     virtualisation = {
-  #       cores = 6;
-  #       darwin-builder = {
-  #         diskSize = 100 * 1024;
-  #         memorySize = 6 * 1024;
-  #       };
-  #     };
-  #     environment.systemPackages = with pkgs; [
-  #       btrfs-progs
-  #     ];
-  #   };
-  # };
+  nix = {
+    package = pkgs.lix;
+    configureBuildUsers = true;
+    settings = {
+      substituters = ["https://cache.lix.systems"];
+      trusted-public-keys = ["cache.lix.systems:aBnZUw8zA7H35Cz2RyKFVs3H4PlGTLawyY5KRbvJR8o="];
+    };
+  };
+#
+#   nix.distributedBuilds = true;
+#   nix.buildMachines = [
+#     {
+#       hostName = "lima-default";
+#       system = "aarch64-linux";
+#       maxJobs = 4;
+#       sshUser = "quinn";
+#       sshKey = "${config.users.users.quinn.home}/.lima/_config/user";
+#       supportedFeatures = ["benchmark" "big-parallel" "nixos-test"];
+#     }
+#   ];
+#
+ nix.linux-builder = {
+   enable = false;
+   # ephemeral = true;
+   # maxJobs = 6;
+   # config = {pkgs, ...}: {
+   #   virtualisation = {
+   #     cores = 6;
+   #     darwin-builder = {
+   #       diskSize = 100 * 1024;
+   #       memorySize = 6 * 1024;
+   #     };
+   #   };
+   #   environment.systemPackages = with pkgs; [
+   #     btrfs-progs
+   #   ];
+   # };
+ };
 
   # NOTE: not sure why stylix insists on having an image...
   stylix.image = pkgs.runCommand "stylix-image" {} "mkdir $out";
@@ -62,7 +71,6 @@
       "eloston-chromium"
       "eqmac"
       "gdisk"
-      "hammerspoon"
       "inkscape"
       "iterm2"
       "itermai"

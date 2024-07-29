@@ -8,6 +8,17 @@
     stylix.url = "github:danth/stylix";
     lollypops.url = "github:pinpox/lollypops";
 
+    lix = {
+      url = "git+https://git.lix.systems/lix-project/lix";
+      flake = false;
+    };
+
+    lix-module = {
+      url = "git+https://git.lix.systems/lix-project/nixos-module";
+      inputs.nixpkgs.follows = "nixpkgs";
+      inputs.lix.follows = "lix";
+    };
+
     flakelight = {
       url = "github:nix-community/flakelight";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -38,7 +49,7 @@
 
       withOverlays = with inputs; [
         nur.overlay
-        nixos-apple-silicon.overlays.apple-silicon-overlay
+        nixos-apple-silicon.overlays.default
       ];
 
       apps.default = {system, ...}:
